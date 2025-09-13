@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anchangles Arena</title>
+  <!-- Favicon for browser tabs -->
+  <link rel="icon" href="favicon.png">
+  <!-- Google Fonts for elegant typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Root variables for consistent colour palette */
+    :root {
+      --bg-dark: #0d0d0d;
+      --gold: #d4af37;
+      --gold-light: #f1d47a;
+      --white: #f9f9f9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      color: var(--white);
+      line-height: 1.5;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(13, 13, 13, 0.8);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header img {
+      height: 48px;
+      width: auto;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-left: 0.5rem;
+      color: var(--gold);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    /* Hero section styles */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 4rem 1rem 8rem 1rem;
+      overflow: hidden;
+    }
+    /* Rotating spotlight overlay */
+    .hero .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(212, 175, 55, 0.25), transparent 70%);
+      animation: spotlight 60s linear infinite;
+      transform-origin: center;
+      mix-blend-mode: screen;
+    }
+    @keyframes spotlight {
+      from { transform: rotate(0deg) scale(1.5); }
+      to { transform: rotate(360deg) scale(1.5); }
+    }
+    .hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .hero .logo-hero {
+      display: block;
+      margin: 0 auto 1.5rem auto;
+      width: 200px;
+    }
+    /* Verse cards container */
+    .verse-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .verse {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 1rem;
+      padding: 1rem;
+      width: clamp(250px, 30%, 320px);
+      position: relative;
+      overflow: hidden;
+    }
+    .verse span.reference {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .verse .text {
+      font-size: 0.9rem;
+      color: var(--gold);
+      font-weight: 400;
+    }
+    .verse .text strong {
+      font-weight: 700;
+    }
+    /* Highlight shimmering animation for key phrases */
+    .highlight {
+      animation: shimmer 6s infinite linear;
+      background-image: linear-gradient(90deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.8) 50%, rgba(212, 175, 55, 0.2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 100%;
+    }
+    @keyframes shimmer {
+      from { background-position: -200% 0; }
+      to   { background-position: 200% 0; }
+    }
+
+    /* Services section */
+    #services {
+      padding: 6rem 2rem;
+      background: linear-gradient(180deg, rgba(13, 13, 13, 1), rgba(25, 25, 25, 1));
+    }
+    #services h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .service-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 1rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+    .service-card h4 {
+      color: var(--gold);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--white);
+    }
+
+    /* Contact section */
+    #contact {
+      padding: 4rem 2rem;
+      background: rgba(13, 13, 13, 0.9);
+      text-align: center;
+    }
+    #contact h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    #contact p {
+      color: var(--white);
+      margin-bottom: 2rem;
+    }
+    #contact form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    #contact input,
+    #contact textarea {
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 0.5rem;
+      color: var(--white);
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+    }
+    #contact button {
+      padding: 0.75rem;
+      background: var(--gold);
+      color: var(--bg-dark);
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #contact button:hover {
+      background: var(--gold-light);
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(13, 13, 13, 0.9);
+      padding: 2rem 1rem;
+      text-align: center;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    footer img {
+      width: 80px;
+      margin-bottom: 1rem;
+    }
+    footer p {
+      color: var(--white);
+      font-size: 0.8rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 2rem;
+      }
+      .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Site header with logo and navigation -->
+  <header>
+    <div style="display: flex; align-items: center;">
+      <img src="logo.png" alt="Anchangles Arena logo">
+      <h1>Anchangles Arena</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero section with spotlight and verses -->
+  <section class="hero" id="home">
+    <!-- rotating spotlight overlay -->
+    <div class="background"></div>
+    <!-- Centered hero logo -->
+    <img class="logo-hero" src="logo-hero.png" alt="Michael the Archangel Logo">
+    <h2>Where discipline meets devotion</h2>
+    <div class="verse-container">
+      <!-- Verse cards will be populated by JavaScript -->
+    </div>
+  </section>
+
+  <!-- Services offerings -->
+  <section id="services">
+    <h3>Our Offerings</h3>
+    <div class="services-grid">
+      <div class="service-card">
+        <h4>Bible Study</h4>
+        <p>Deepen your understanding of Scripture through group studies and guided sessions.</p>
+      </div>
+      <div class="service-card">
+        <h4>Entrepreneurship</h4>
+        <p>Learn to build and grow businesses on solid foundations.</p>
+      </div>
+      <div class="service-card">
+        <h4>Social Media Growth</h4>
+        <p>Expand your impact and connect with audiences through powerful digital strategies.</p>
+      </div>
+      <div class="service-card">
+        <h4>Consulting</h4>
+        <p>Receive personalized guidance on your professional and spiritual journey.</p>
+      </div>
+      <div class="service-card">
+        <h4>Personal Brand Scaling</h4>
+        <p>Elevate your personal brand to new heights with our tailored coaching.</p>
+      </div>
+      <div class="service-card">
+        <h4>Stocks &amp; Low Risk Investments</h4>
+        <p>Grow your wealth wisely with our low risk financial strategies.</p>
+      </div>
+      <div class="service-card">
+        <h4>Web Development</h4>
+        <p>Craft beautiful and functional websites that reflect your mission.</p>
+      </div>
+      <div class="service-card">
+        <h4>Software Engineering</h4>
+        <p>Leverage state-of-the-art software solutions built for your success.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact form section -->
+  <section id="contact">
+    <h3>Contact Us</h3>
+    <p>We're here to help you thrive. Reach out for more information or to get started.</p>
+    <form action="#" method="post">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer with seal and copyright notice -->
+  <footer>
+    <img src="logo-footer.png" alt="Anchangles Arena Seal">
+    <p>© 2025 Anchangles Arena. All rights reserved.</p>
+  </footer>
+
+  <!-- Script to populate verses and highlight key phrases -->
+  <script>
+    // List of verses with highlighted key phrases
+    const verses = [
+      {
+        reference: '1 Corinthians 9:25-27',
+        text: 'Everyone who competes in the games goes into strict training. They do it to get a crown that will not last, but we do it to get a crown that will last forever. Therefore I do not run like someone running aimlessly; I do not fight like a boxer beating the air. I strike a blow to my body and make it my slave so that after I have preached to others, I myself will not be disqualified for the prize.',
+        highlights: ['strict training', 'crown that will last forever']
+      },
+      {
+        reference: 'Joshua 1:9',
+        text: 'Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.',
+        highlights: ['Be strong and courageous', 'do not be afraid', 'God will be with you']
+      },
+      {
+        reference: 'Isaiah 40:31',
+        text: 'But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.',
+        highlights: ['renew their strength', 'soar on wings like eagles', 'run and not grow weary']
+      },
+      {
+        reference: 'Hebrews 12:11',
+        text: 'No discipline seems pleasant at the time, but painful. Later on, however, it produces a harvest of righteousness and peace for those who have been trained by it.',
+        highlights: ['discipline', 'harvest of righteousness and peace']
+      },
+      {
+        reference: 'Ephesians 6:10',
+        text: 'Finally, be strong in the Lord and in his mighty power.',
+        highlights: ['be strong in the Lord', 'his mighty power']
+      }
+    ];
+    const verseContainer = document.querySelector('.verse-container');
+    verses.forEach(v => {
+      const div = document.createElement('div');
+      div.classList.add('verse');
+      const ref = document.createElement('span');
+      ref.classList.add('reference');
+      ref.textContent = v.reference;
+      const textP = document.createElement('p');
+      textP.classList.add('text');
+      // Highlight key phrases by wrapping them in <strong> with highlight class
+      let processed = v.text;
+      v.highlights.forEach(h => {
+        const regex = new RegExp(h, 'gi');
+        processed = processed.replace(regex, '<strong class="highlight">' + h + '</strong>');
+      });
+      textP.innerHTML = processed;
+      div.appendChild(ref);
+      div.appendChild(textP);
+      verseContainer.appendChild(div);
+    });
+  </script>
+</body>
+</html>
